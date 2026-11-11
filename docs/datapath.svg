@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1480 940" width="1480" height="940" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+<defs>
+  <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,1 L9,5 L0,9 z" fill="#334155"/>
+  </marker>
+</defs>
+<style>
+  rect.unit, path.unit { fill:#f8fafc; stroke:#334155; stroke-width:1.8; }
+  rect.small { fill:#f1f5f9; }
+  rect.ctrlbox { fill:#eef2ff; stroke:#4338ca; stroke-width:1.8; }
+  path.mux { fill:#e2e8f0; stroke:#334155; stroke-width:1.5; }
+  polyline.w { fill:none; stroke:#334155; stroke-width:1.8; }
+  polyline.c { fill:none; stroke:#4338ca; stroke-width:1.5; stroke-dasharray:6 4; }
+  circle.dot { fill:#334155; }
+  text { fill:#0f172a; }
+  text.t-title { font-size:15px; font-weight:600; text-anchor:middle; }
+  text.t-sub { font-size:11px; fill:#475569; text-anchor:middle; }
+  text.t-mux { font-size:10px; fill:#334155; text-anchor:middle; }
+  text.t-wire { font-size:11.5px; fill:#334155; }
+  text.t-note { font-size:11.5px; fill:#475569; }
+  text.b { font-weight:700; fill:#0f172a; }
+  text.t-h1 { font-size:22px; font-weight:700; }
+  text.t-h2 { font-size:12.5px; fill:#64748b; }
+</style>
+<text class="t-h1" x="40" y="42" text-anchor="start">Single-Cycle RV32I Datapath</text>
+<path class="mux" d="M60,300 L82,310 L82,410 L60,420 Z"/>
+<text class="t-mux" x="71.0" y="364.0">3:1</text>
+<rect class="unit" x="120" y="320" width="70" height="80" rx="6"/>
+<text class="t-title" x="155.0" y="354.0">PC</text>
+<text class="t-sub" x="155.0" y="370.0">register</text>
+<rect class="unit" x="240" y="310" width="120" height="100" rx="6"/>
+<text class="t-title" x="300.0" y="354.0">Instruction</text>
+<text class="t-sub" x="300.0" y="370.0">memory</text>
+<rect class="unit small" x="250" y="180" width="70" height="50" rx="6"/>
+<text class="t-title" x="285.0" y="205.0">+4</text>
+<polyline class="w" points="82,360 120,360" marker-end="url(#a)"/>
+<polyline class="w" points="190,360 240,360" marker-end="url(#a)"/>
+<text class="t-wire" x="215" y="350" text-anchor="middle">PC</text>
+<circle class="dot" cx="210" cy="360" r="4"/>
+<polyline class="w" points="210,360 210,205 250,205" marker-end="url(#a)"/>
+<polyline class="w" points="320,205 505,205"/>
+<polyline class="w" points="505,205 505,148 40,148 40,318 60,318" marker-end="url(#a)"/>
+<text class="t-wire" x="240" y="141" text-anchor="middle">PC+4</text>
+<circle class="dot" cx="505" cy="205" r="4"/>
+<text class="t-note" x="372" y="300" text-anchor="start">instruction [31:0]</text>
+<polyline class="w" points="360,360 400,360"/>
+<circle class="dot" cx="400" cy="360" r="4"/>
+<rect class="unit" x="470" y="300" width="150" height="170" rx="6"/>
+<text class="t-title" x="545.0" y="379.0">Register file</text>
+<text class="t-sub" x="545.0" y="395.0">32 x 32-bit,  x0 = 0</text>
+<rect class="unit" x="470" y="540" width="150" height="60" rx="6"/>
+<text class="t-title" x="545.0" y="564.0">Immediate</text>
+<text class="t-sub" x="545.0" y="580.0">generator</text>
+<polyline class="w" points="400,360 400,330 432,330 432,330 470,330" marker-end="url(#a)"/>
+<text class="t-wire" x="428" y="324" text-anchor="end">rs1 [19:15]</text>
+<polyline class="w" points="400,360 400,360 432,360 432,370 470,370" marker-end="url(#a)"/>
+<text class="t-wire" x="428" y="354" text-anchor="end">rs2 [24:20]</text>
+<polyline class="w" points="400,360 400,390 432,390 432,440 470,440" marker-end="url(#a)"/>
+<text class="t-wire" x="428" y="384" text-anchor="end">rd  [11:7]</text>
+<polyline class="w" points="400,360 400,570 470,570" marker-end="url(#a)"/>
+<text class="t-wire" x="436" y="562" text-anchor="middle">instr [31:7]</text>
+<rect class="ctrlbox" x="700" y="95" width="300" height="72" rx="6"/>
+<text class="t-title" x="850.0" y="125.0">Control unit</text>
+<text class="t-sub" x="850.0" y="141.0">opcode -&gt; control signals</text>
+<rect class="ctrlbox" x="1040" y="95" width="170" height="72" rx="6"/>
+<text class="t-title" x="1125.0" y="125.0">ALU control</text>
+<text class="t-sub" x="1125.0" y="141.0">funct3 / funct7</text>
+<polyline class="c" points="400,360 400,131 700,131" marker-end="url(#a)"/>
+<text class="t-wire" x="550" y="124" text-anchor="middle">opcode [6:0]</text>
+<polyline class="c" points="1000,131 1040,131" marker-end="url(#a)"/>
+<text class="t-wire" x="1020" y="124" text-anchor="middle">ALUOp</text>
+<polyline class="c" points="412,360 412,176 1120,176 1120,167" marker-end="url(#a)"/>
+<text class="t-note" x="424" y="200" text-anchor="start">funct3 [14:12],  instr[30]</text>
+<path class="mux" d="M660,300 L682,310 L682,370 L660,380 Z"/>
+<text class="t-mux" x="671.0" y="344.0">3:1</text>
+<path class="mux" d="M660,400 L682,410 L682,470 L660,480 Z"/>
+<text class="t-mux" x="671.0" y="444.0">2:1</text>
+<path class="unit" d="M730,290 L840,343.2 L840,426.79999999999995 L730,480 L730,393.0 L744,385.0 L730,377.0 Z"/>
+<text class="t-title" x="787.2" y="390.0">ALU</text>
+<polyline class="w" points="620,332 660,332" marker-end="url(#a)"/>
+<text class="t-wire" x="638" y="325" text-anchor="middle">rs1</text>
+<polyline class="w" points="620,430 660,430" marker-end="url(#a)"/>
+<text class="t-wire" x="638" y="423" text-anchor="middle">rs2</text>
+<polyline class="w" points="210,240 652,240 652,348 660,348" marker-end="url(#a)"/>
+<text class="t-wire" x="330" y="233" text-anchor="middle">PC</text>
+<text class="t-wire" x="638" y="368" text-anchor="end">0</text>
+<polyline class="w" points="644,364 660,364" marker-end="url(#a)"/>
+<circle class="dot" cx="210" cy="240" r="4"/>
+<polyline class="w" points="620,570 643,570 643,450 660,450" marker-end="url(#a)"/>
+<text class="t-wire" x="666" y="556" text-anchor="middle">imm</text>
+<circle class="dot" cx="643" cy="570" r="4"/>
+<polyline class="w" points="682,340 730,340" marker-end="url(#a)"/>
+<polyline class="w" points="682,440 730,440" marker-end="url(#a)"/>
+<polyline class="c" points="740,167 740,252 672,252 672,300" marker-end="url(#a)"/>
+<text class="t-wire" x="728" y="245" text-anchor="middle">ALUSrcA / ALUSrcB</text>
+<polyline class="c" points="1125,167 1125,228 800,228 800,290" marker-end="url(#a)"/>
+<text class="t-wire" x="880" y="221" text-anchor="middle">alu_ctrl</text>
+<rect class="unit" x="730" y="640" width="150" height="60" rx="6"/>
+<text class="t-title" x="805.0" y="664.0">Branch unit</text>
+<text class="t-sub" x="805.0" y="680.0">comparator</text>
+<circle class="dot" cx="635" cy="430" r="4"/>
+<circle class="dot" cx="648" cy="430" r="4"/>
+<polyline class="w" points="635,332 635,660 730,660" marker-end="url(#a)"/>
+<circle class="dot" cx="635" cy="332" r="4"/>
+<polyline class="w" points="648,430 648,685 730,685" marker-end="url(#a)"/>
+<text class="t-note" x="660" y="712" text-anchor="start">rs1, rs2</text>
+<rect class="unit small" x="300" y="700" width="90" height="55" rx="6"/>
+<text class="t-title" x="345.0" y="721.5">+</text>
+<text class="t-sub" x="345.0" y="737.5">PC + imm</text>
+<polyline class="w" points="210,360 210,727 300,727" marker-end="url(#a)"/>
+<polyline class="w" points="643,570 643,800 262,800 262,742 300,742" marker-end="url(#a)"/>
+<polyline class="w" points="390,727 430,727 430,845 30,845 30,352 60,352" marker-end="url(#a)"/>
+<text class="t-wire" x="700" y="838" text-anchor="middle">branch / jal target</text>
+<rect class="unit" x="900" y="300" width="110" height="190" rx="6"/>
+<text class="t-title" x="955.0" y="389.0">Load /</text>
+<text class="t-sub" x="955.0" y="405.0">store unit</text>
+<rect class="unit" x="1060" y="320" width="120" height="150" rx="6"/>
+<text class="t-title" x="1120.0" y="389.0">Data</text>
+<text class="t-sub" x="1120.0" y="405.0">memory</text>
+<polyline class="w" points="840,385 900,385" marker-end="url(#a)"/>
+<text class="t-wire" x="870" y="378" text-anchor="middle">address</text>
+<circle class="dot" cx="870" cy="385" r="4"/>
+<polyline class="w" points="635,430 635,525 880,525 880,455 900,455" marker-end="url(#a)"/>
+<text class="t-wire" x="760" y="543" text-anchor="middle">rs2 (store data)</text>
+<polyline class="w" points="1010,355 1060,355" marker-end="url(#a)"/>
+<text class="t-wire" x="1035" y="345" text-anchor="middle">wdata, wstrb</text>
+<polyline class="w" points="1060,435 1010,435" marker-end="url(#a)"/>
+<text class="t-wire" x="1035" y="455" text-anchor="middle">rdata</text>
+<polyline class="c" points="900,167 900,214 952,214 952,300" marker-end="url(#a)"/>
+<text class="t-wire" x="982" y="207" text-anchor="middle">MemWrite</text>
+<path class="mux" d="M1250,300 L1272,310 L1272,410 L1250,420 Z"/>
+<text class="t-mux" x="1261.0" y="364.0">3:1</text>
+<polyline class="w" points="870,385 870,268 1232,268 1232,315 1250,315" marker-end="url(#a)"/>
+<text class="t-wire" x="1060" y="261" text-anchor="middle">ALU result</text>
+<polyline class="w" points="955,490 955,560 1262,560 1262,430 1260,430" marker-end="url(#a)"/>
+<text class="t-wire" x="1110" y="576" text-anchor="middle">load data</text>
+<polyline class="w" points="505,205 505,84 1240,84 1240,355 1250,355" marker-end="url(#a)"/>
+<text class="t-wire" x="620" y="77" text-anchor="middle">PC+4 (return address)</text>
+<polyline class="c" points="850,167 850,190 1300,190 1300,300" marker-end="url(#a)"/>
+<text class="t-wire" x="1360" y="183" text-anchor="middle">ResultSrc</text>
+<polyline class="w" points="1272,360 1420,360 1420,890 452,890 452,455 470,455" marker-end="url(#a)"/>
+<text class="t-wire" x="980" y="883" text-anchor="middle">write-back to rd</text>
+<polyline class="c" points="960,167 960,284 545,284 545,300" marker-end="url(#a)"/>
+<text class="t-wire" x="560" y="277" text-anchor="middle">RegWrite</text>
+<polyline class="w" points="840,460 862,460 862,618 20,618 20,384 60,384" marker-end="url(#a)"/>
+<text class="t-wire" x="300" y="611" text-anchor="middle">jalr target  (ALU result, bit 0 cleared)</text>
+<polyline class="c" points="880,670 1446,670 1446,920 95,920 95,420" marker-end="url(#a)"/>
+<text class="t-wire" x="1410" y="662" text-anchor="middle">taken</text>
+<polyline class="c" points="700,145 676,145 676,56 110,56 110,300" marker-end="url(#a)"/>
+<text class="t-wire" x="480" y="49" text-anchor="middle">branch / jump / jalr</text>
+<text class="t-note b" x="470" y="646" text-anchor="start">solid = data</text>
+<text class="t-note" x="470" y="662" text-anchor="start">dashed = control</text>
+<text class="t-note b" x="470" y="686" text-anchor="start">Inside one clock period:</text>
+<text class="t-note" x="470" y="702" text-anchor="start">1  fetch</text>
+<text class="t-note" x="470" y="717" text-anchor="start">2  decode</text>
+<text class="t-note" x="470" y="732" text-anchor="start">3  execute</text>
+<text class="t-note" x="470" y="747" text-anchor="start">4  memory</text>
+<text class="t-note" x="470" y="762" text-anchor="start">5  write-back</text>
+</svg>

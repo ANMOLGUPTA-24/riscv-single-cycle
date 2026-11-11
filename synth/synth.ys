@@ -1,0 +1,58 @@
+# =============================================================================
+# synth.ys - Yosys synthesis script for the single-cycle RV32I core
+# -----------------------------------------------------------------------------
+# Produces:
+#   * build/riscv_core_netlist.v  flattened gate-level netlist
+#   * build/synth_report.txt      area before and after technology mapping
+#   * a `check` pass that fails on inferred latches, combinational loops and
+#     multiply-driven nets - the structural faults that simulate fine but will
+#     not build in hardware
+#
+# The synthesis target is riscv_core, not riscv_top: the memories belong to the
+# platform (block RAM on an FPGA), not to the processor itself.
+#
+# Run with:  yosys -s synth/synth.ys     (or `make synth`)
+# =============================================================================
+
+verilog_defaults -add -I src
+read_verilog src/alu.v
+read_verilog src/alu_control.v
+read_verilog src/branch_unit.v
+read_verilog src/control_unit.v
+read_verilog src/imm_gen.v
+read_verilog src/lsu.v
+read_verilog src/pc.v
+read_verilog src/reg_file.v
+read_verilog src/riscv_core.v
+
+hierarchy -check -top riscv_core
+
+tee -o build/synth_report.txt log ===== structural check, pre-synthesis =====
+proc
+opt
+tee -a build/synth_report.txt check -assert
+
+tee -a build/synth_report.txt log .
+tee -a build/synth_report.txt log ===== hierarchy, before flattening =====
+tee -a build/synth_report.txt stat
+
+synth -top riscv_core -flatten
+
+tee -a build/synth_report.txt log .
+tee -a build/synth_report.txt log ===== area, generic cells after synthesis =====
+tee -a build/synth_report.txt stat
+
+# abc -g simple maps to AND/OR/XOR/NOT/MUX only, which gives a
+# technology-independent gate count that is fair to quote in a report.
+abc -g simple
+opt -purge
+
+tee -a build/synth_report.txt log .
+tee -a build/synth_report.txt log ===== area, mapped to simple gates =====
+tee -a build/synth_report.txt stat
+
+tee -a build/synth_report.txt log .
+tee -a build/synth_report.txt log ===== final structural check =====
+tee -a build/synth_report.txt check -assert
+
+write_verilog -noattr build/riscv_core_netlist.v
